@@ -1,0 +1,59 @@
+//Code for CONVENIENCE STORE
+
+#include<stdio.h>
+#include<string.h>
+#define MAX_ITEMS 100
+struct Item{
+    char name[50];
+    char department[50];
+    float price;
+    float finalPrice;//Final price after GST
+};
+void swap(struct Item *a, struct Item *b){
+    struct Item temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void sortItemsByPrice(struct Item items[], int n){
+    for(int i = 0; i < n - 1; i++){
+        for(int j = 0; j < n - i - 1; j++){
+            if(items[j].price < items[j + 1].price){
+                swap(&items[j], &items[j + 1]);
+            }
+        }
+    }
+}
+int main(){
+    int n;
+    printf("Enter the number of items: ");
+    scanf("%d", &n);
+    if(n <= 0 || n > MAX_ITEMS){
+        printf("Invalid number of items! Please enter a value between 1 and %d.\n", MAX_ITEMS);
+        return 1;
+    }
+    struct Item items[n];
+    for(int i = 0; i < n; i++){
+        printf("\nEnter details for item %d:\n", i + 1);
+        printf("Enter name: ");
+        getchar();
+        fgets(items[i].name, sizeof(items[i].name), stdin);
+        items[i].name[strcspn(items[i].name, "\n")] = 0;
+        printf("Enter department: ");
+        fgets(items[i].department, sizeof(items[i].department), stdin);
+        items[i].department[strcspn(items[i].department, "\n")] = 0;
+        printf("Enter price: ");
+        scanf("%f", &items[i].price);
+        //Apply 5% GST
+        items[i].finalPrice = items[i].price * 1.05;
+    }
+    sortItemsByPrice(items, n);
+    printf("\nItem Information (Sorted by Price - Highest to Lowest):\n");
+    printf("--------------------------------------------------------------------------------\n");
+    printf("%-20s %-20s %-10s %-10s\n", "Name", "Department", "Price", "Final Price");
+    printf("--------------------------------------------------------------------------------\n");
+    for(int i = 0; i < n; i++){
+        printf("%-20s %-20s %-10.2f %-10.2f\n", items[i].name, items[i].department, items[i].price, items[i].finalPrice);
+    }
+    printf("\nThank you for using the inventory system!\n");
+    return 0;
+}
