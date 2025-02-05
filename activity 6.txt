@@ -1,4 +1,4 @@
-//Code for CONVENIENCE STORE
+//Code for Item Sorting with GST Calculation
 
 #include<stdio.h>
 #include<string.h>
