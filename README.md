@@ -1,5 +1,4 @@
 #Item Sorting with GST Calculation
-
 Overview: 
 This C program allows users to enter details of multiple items, sorts them by price (from highest to lowest), and calculates the final price after applying a 5% GST (Goods and Services Tax). The program utilizes structured data to store item information and provides a sorted list of items based on price.
 
